@@ -1,0 +1,85 @@
+
+#
+# Mnemonic Maps
+#
+mmap new  -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new  -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+array unset createdGroup
+array set createdGroup {}
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.CLK_PERIOD}]}
+	} ]]
+waveform format $id -bgcolor #001e5c
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DATA_WIDTH_IN}]}
+	} ]]
+waveform format $id -bgcolor #001e5c
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DATA_WIDTH_OUT}]}
+	} ]]
+waveform format $id -bgcolor #001e5c
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.FIFO_DEPTH}]}
+	} ]]
+waveform format $id -bgcolor #001e5c
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.ONE_RAM_DEPTH}]}
+	} ]]
+waveform format $id -bgcolor #001e5c
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.aresetn}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.clk}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.m_tdata1[31:0]}]}
+	} ]]
+waveform format $id -color #ff0099
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.m_tdata2[31:0]}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.m_tready1}]}
+	} ]]
+waveform format $id -color #ff0099
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.m_tready2}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.m_tuser1}]}
+	} ]]
+waveform format $id -color #ff0099
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.m_tuser2}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.m_tvalid1}]}
+	} ]]
+waveform format $id -color #ff0099
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.m_tvalid2}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.s_tdata[63:0]}]}
+	} ]]
+waveform format $id -color #0000ff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.s_tready}]}
+	} ]]
+waveform format $id -color #0000ff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.s_tvalid}]}
+	} ]]
+waveform format $id -color #0000ff
+
+waveform xview limits 21ns 197ns

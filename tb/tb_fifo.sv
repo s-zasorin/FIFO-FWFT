@@ -2,6 +2,8 @@ module tb_fifo();
 
   localparam DATA_WIDTH_OUT = 32;
   localparam DATA_WIDTH_IN  = 2 * DATA_WIDTH_OUT;
+  localparam FIFO_DEPTH     = 16;
+  localparam RAM_DEPTH      = FIFO_DEPTH / 2;
   int        CLK_PERIOD     = 5;
 
   logic clk;
@@ -20,6 +22,10 @@ module tb_fifo();
   logic                        m_tvalid2;
   logic                        m_tready2;
   logic                        m_tuser2 ;
+
+  // TB reg model
+  logic [DATA_WIDTH_OUT - 1: 0]    ram1 [$: RAM_DEPTH - 1];
+  logic [DATA_WIDTH_OUT - 1: 0]    ram2 [$: RAM_DEPTH - 1];
 
   task automatic reset_gen();
     aresetn <= 1'b0;
@@ -40,17 +46,16 @@ module tb_fifo();
   endtask
 
   task push_data();
-    repeat(10) begin
-      logic [DATA_WIDTH_IN - 1:0] data;
-      data = {$urandom, $urandom};
-      axis_write(data);
-    end
+    logic [DATA_WIDTH_IN - 1:0] data;
+    data = {$urandom, $urandom};
+    axis_write(data);
   endtask
 
 multi_port_fifo
   #(
   .DATA_WIDTH_OUT(DATA_WIDTH_OUT),
-  .DATA_WIDTH_IN (DATA_WIDTH_IN )
+  .DATA_WIDTH_IN (DATA_WIDTH_IN ),
+  .FIFO_DEPTH    (FIFO_DEPTH)
   )
   DUT (
   .aclk_i     (clk      ),
@@ -68,7 +73,7 @@ multi_port_fifo
   .m_tdata2_o (m_tdata2 ),
   .m_tvalid2_o(m_tvalid2),
   .m_tready2_i(m_tready2),
-  .m_tuser2_o (m_tuser2 ) 
+  .m_tuser2_o (m_tuser2 )
 );
 
   initial begin
@@ -78,37 +83,61 @@ multi_port_fifo
       clk <= ~clk;
     end
   end
-    
-  // Тесты.
 
+  // Подача сброса, завершение симуляции
   initial begin
+    reset_gen();
+    repeat(600)
+      #(2*CLK_PERIOD);
+    $finish();
+  end
+
+  // Блок отправки 64-битных транзакций
+  // Будет отправлено случайное число транзакций,
+  // после этого процессор должен поспать (спокойной ночи)
+  initial begin
+    int sleep_time, data_amount;
+
     s_tvalid  <= 1'b0;
     s_tdata   <=  'b0;
     m_tready1 <= 1'b0;
     m_tready2 <= 1'b0;
-    reset_gen();
-    // Тесты.
-    push_data ();
-    repeat (40) @(posedge clk);
-    push_data ();
-    $finish();
-  end
+    wait(aresetn);
 
-  initial begin
-    repeat (5) @(posedge clk);
-    m_tready1 <= 1'b1;
-    @(posedge clk);
-    repeat(15) begin
-      m_tready1 <= ~m_tready1;
-      @(posedge clk);
+    forever begin
+      sleep_time  = $urandom_range(0, 50);
+      data_amount = $urandom_range(0, FIFO_DEPTH);
+      repeat (data_amount) push_data();
+      repeat (sleep_time ) #(2*CLK_PERIOD);
     end
   end
 
   initial begin
-    repeat (6) @(posedge clk);
-    repeat(15) begin
-      m_tready2 <= ~m_tready2;
-      @(posedge clk);
+    forever begin
+      if (s_tvalid && s_tready) begin
+        ram1.push_front(s_tdata[DATA_WIDTH_IN/2 - 1 : 0]);
+        ram2.push_front(s_tdata[DATA_WIDTH_IN   - 1 : DATA_WIDTH_IN/2]);
+        $display($sformatf("Ram1 size is: %d", ram1.size()));
+      end
+      #(2*CLK_PERIOD);
     end
   end
+
+  task read1();
+    m_tready1 <= '1;
+    wait(m_tready1 && m_tvalid1);
+    m_tready1 <= '0;
+  endtask
+  task read2();
+    m_tready2 <= '2;
+    wait(m_tready2 && m_tvalid2);
+    m_tready2 <= '0;
+  endtask
+
+  // При заполненном FIFO сигнал tvalid не может быть в 1
+  assert property (@(posedge clk) (ram1.size() == RAM_DEPTH || ram2.size() == RAM_DEPTH) |=> ~s_tready);
+
+  // При чтении из FIFO данные соответствуют эталонной модели
+  assert property (@(posedge clk) (m_tready1 && m_tvalid1) |-> ram1.pop_back() === m_tdata1);
+  assert property (@(posedge clk) (m_tready2 && m_tvalid2) |-> ram2.pop_back() === m_tdata2);
 endmodule
