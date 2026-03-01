@@ -1,0 +1,23 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-XLMODE
+/home/Stepan/micro_labs/lab1/build/work/xcelium.d/run.lnx8664.22.03.d
+-RUNMODE
+-amsdlibdir
+/home/Stepan/micro_labs/lab1/build/work/xcelium.d/AMSD
+/home/Stepan/micro_labs/lab1/build/../rtl/multi_port_fifo.sv
+/home/Stepan/micro_labs/lab1/build/../rtl/dual_port_ram.sv
+/home/Stepan/micro_labs/lab1/build/../tb/tb_fifo.sv
+-XMLIBDIRPATH
+/home/Stepan/micro_labs/lab1/build/work
+-CDSLIB
+/home/Stepan/micro_labs/lab1/build/work/xcelium.d/run.lnx8664.22.03.d/cdsrun.lib
+-HDLVAR
+/home/Stepan/micro_labs/lab1/build/work/xcelium.d/run.lnx8664.22.03.d/hdlrun.var
+-MESSAGES
+-UPDATE
+-XLLIBSTORE
+/home/Stepan/micro_labs/lab1/build/work/xcelium.d/run.lnx8664.22.03.d/xllibs
+-ALLOWUNBOUND

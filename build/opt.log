@@ -1,0 +1,48 @@
+xrun(64): 22.03-s001: (c) Copyright 1995-2022 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	22.03-s001: Started on Feb 25, 2026 at 18:09:06 MSK
+xrun
+	-elaborate
+	-elabonly
+	-64bit
+	-top tb_fifo
+	-snapshot tb_fifo_opt
+	-xmlibdirpath /home/Stepan/micro_labs/lab1/build/work
+	-access +rwc
+	-l /home/Stepan/micro_labs/lab1/build/opt.log
+No source files were detected on the command line yet something was detected as out of date: Missing module worklib.tb_fifo:sv (SIG) <0x1567bd93>.
+Rerun with the required source files to ensure recompile.
+	Elaborating the design hierarchy:
+		Caching library 'worklib' ....... Done
+	Top level design units:
+		tb_fifo
+xmelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+    .wr_addr_i(wr_ptr1      ),
+                     |
+xmelab: *W,CUVMPW (../rtl/multi_port_fifo.sv,94|21): port sizes differ in port connection(4/3) for the instance(tb_fifo.DUT) .
+    .rd_addr_i(rd_ptr1 + 'b1),
+                       |
+xmelab: *W,CUVMPW (../rtl/multi_port_fifo.sv,98|23): port sizes differ in port connection(32/3) for the instance(tb_fifo.DUT) .
+    .wr_addr_i(wr_ptr2      ),
+                     |
+xmelab: *W,CUVMPW (../rtl/multi_port_fifo.sv,105|21): port sizes differ in port connection(4/3) for the instance(tb_fifo.DUT) .
+    .rd_addr_i(rd_ptr2 + 'b1),
+                       |
+xmelab: *W,CUVMPW (../rtl/multi_port_fifo.sv,109|23): port sizes differ in port connection(32/3) for the instance(tb_fifo.DUT) .
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.tb_fifo:sv <0x1567bd93>
+			streams:  27, words: 13662
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		              Instances  Unique
+		Modules:              4       3
+		Registers:           58      55
+		Scalar wires:        39       -
+		Vectored wires:      21       -
+		Always blocks:       13      11
+		Initial blocks:       5       5
+		Cont. assignments:   23      25
+		Pseudo assignments:  25      25
+	Writing initial simulation snapshot: worklib.tb_fifo_opt:sv
+TOOL:	xrun(64)	22.03-s001: Exiting on Feb 25, 2026 at 18:09:07 MSK  (total: 00:00:01)

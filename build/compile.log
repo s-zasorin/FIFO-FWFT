@@ -1,0 +1,15 @@
+xrun(64): 22.03-s001: (c) Copyright 1995-2022 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	22.03-s001: Started on Feb 25, 2026 at 18:09:06 MSK
+xrun
+	-compile
+	-64bit
+	/home/Stepan/micro_labs/lab1/build/../rtl/multi_port_fifo.sv
+	/home/Stepan/micro_labs/lab1/build/../rtl/dual_port_ram.sv
+	/home/Stepan/micro_labs/lab1/build/../tb/tb_fifo.sv
+	-xmlibdirpath /home/Stepan/micro_labs/lab1/build/work
+	-l /home/Stepan/micro_labs/lab1/build/compile.log
+Recompiling... reason: unable to stat '/./home/Stepan/micro_labs/lab1/rtl/single_port_ram.sv'.
+file: /home/Stepan/micro_labs/lab1/build/../tb/tb_fifo.sv
+	module worklib.tb_fifo:sv
+		errors: 0, warnings: 0
+TOOL:	xrun(64)	22.03-s001: Exiting on Feb 25, 2026 at 18:09:06 MSK  (total: 00:00:00)

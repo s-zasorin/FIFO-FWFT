@@ -1,0 +1,35 @@
+xrun(64): 22.03-s001: (c) Copyright 1995-2022 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	22.03-s001: Started on Feb 25, 2026 at 18:09:07 MSK
+xrun
+	-r tb_fifo_opt
+	-64bit
+	-xmlibdirpath /home/Stepan/micro_labs/lab1/build/work
+	-seed 16613
+	-l /home/Stepan/micro_labs/lab1/build/run.log
+	-input xlm.tcl
+	-input @run
+	-gui
+xmsim: *W,NOMTDGUI: Multi-Threaded Dumping is disabled for interactive debug mode.
+SVSEED set from command line: 16613
+xmsim: *W,DSEM2009: This SystemVerilog design is simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+xmsim: *E,IONOEN: file does not exist, xlm.tcl.
+
+-------------------------------------
+Relinquished control to SimVision...
+xcelium> 
+xcelium> source /local/tools/cadence/XCELIUM/22.03/tools/xcelium/files/xmsimrc
+xcelium> run
+Simulation interrupted at 812179465 NS + 1
+xcelium> database -open waves -into waves.shm -default
+Created default SHM database waves
+xcelium> probe -create -shm tb_fifo.DUT.aclk_i tb_fifo.DUT.almost_empty1 tb_fifo.DUT.almost_empty2 tb_fifo.DUT.aresetn_i tb_fifo.DUT.bypass_en1 tb_fifo.DUT.bypass_en2 tb_fifo.DUT.data_in1 tb_fifo.DUT.data_in2 tb_fifo.DUT.data_ram_out1 tb_fifo.DUT.data_ram_out2 tb_fifo.DUT.empty1 tb_fifo.DUT.empty2 tb_fifo.DUT.empty_ram tb_fifo.DUT.enable_head_reg1 tb_fifo.DUT.enable_head_reg2 tb_fifo.DUT.full tb_fifo.DUT.full1 tb_fifo.DUT.full2 tb_fifo.DUT.head_reg1 tb_fifo.DUT.head_reg2 tb_fifo.DUT.m_handshake1 tb_fifo.DUT.m_handshake2 tb_fifo.DUT.m_tdata1_o tb_fifo.DUT.m_tdata2_o tb_fifo.DUT.m_tready1_i tb_fifo.DUT.m_tready2_i tb_fifo.DUT.m_tuser1_o tb_fifo.DUT.m_tuser2_o tb_fifo.DUT.m_tvalid1_o tb_fifo.DUT.m_tvalid2_o tb_fifo.DUT.rd_en1 tb_fifo.DUT.rd_en2 tb_fifo.DUT.rd_ptr1 tb_fifo.DUT.rd_ptr2 tb_fifo.DUT.s_handshake tb_fifo.DUT.s_tdata_i tb_fifo.DUT.s_tready_o tb_fifo.DUT.s_tvalid_i tb_fifo.DUT.wr_en1 tb_fifo.DUT.wr_en2 tb_fifo.DUT.wr_ptr1 tb_fifo.DUT.wr_ptr2 tb_fifo.DUT.i_ram1.clk_i tb_fifo.DUT.i_ram1.data_ff tb_fifo.DUT.i_ram1.data_i tb_fifo.DUT.i_ram1.data_o tb_fifo.DUT.i_ram1.ram tb_fifo.DUT.i_ram1.rd_addr_i tb_fifo.DUT.i_ram1.rd_en_i tb_fifo.DUT.i_ram1.wr_addr_i tb_fifo.DUT.i_ram1.wr_en_i tb_fifo.DUT.i_ram2.clk_i tb_fifo.DUT.i_ram2.data_ff tb_fifo.DUT.i_ram2.data_i tb_fifo.DUT.i_ram2.data_o tb_fifo.DUT.i_ram2.ram tb_fifo.DUT.i_ram2.rd_addr_i tb_fifo.DUT.i_ram2.rd_en_i tb_fifo.DUT.i_ram2.wr_addr_i tb_fifo.DUT.i_ram2.wr_en_i
+Created probe 1
+xcelium> reset
+SVSEED set from command line: 16613
+xmsim: *W,DSEM2009: This SystemVerilog design is simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+Loaded snapshot worklib.tb_fifo_opt:sv
+xcelium> run
+Simulation interrupted at 66340305 NS + 0
+xcelium> ^C
+xcelium> exit
+TOOL:	xrun(64)	22.03-s001: Exiting on Feb 26, 2026 at 16:49:54 MSK  (total: 22:40:47)

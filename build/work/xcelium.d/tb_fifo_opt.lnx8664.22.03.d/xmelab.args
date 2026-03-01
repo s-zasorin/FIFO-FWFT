@@ -1,0 +1,20 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-amsdlibdir
+/home/Stepan/micro_labs/lab1/build/work/xcelium.d/AMSD
+-ACCESS
++rwc
+-MESSAGES
+tb_fifo
+-XLMODE
+/home/Stepan/micro_labs/lab1/build/work/xcelium.d/tb_fifo_opt.lnx8664.22.03.d
+-RUNMODE
+-CDSLIB
+/home/Stepan/micro_labs/lab1/build/work/xcelium.d/tb_fifo_opt.lnx8664.22.03.d/cds.lib
+-HDLVAR
+/home/Stepan/micro_labs/lab1/build/work/xcelium.d/tb_fifo_opt.lnx8664.22.03.d/hdl.var
+-WORK
+worklib
+-IRUNHASTOP

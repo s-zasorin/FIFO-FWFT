@@ -1,0 +1,23 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-amsdlibdir
+/home/Stepan/micro_labs/lab1/build/work/xcelium.d/AMSD
+-MESSAGES
++EMGRLOG
+/home/Stepan/micro_labs/lab1/build/compile.log
+-XLSTIME
+1772032146
+-XLKEEP
+-XLMODE
+/home/Stepan/micro_labs/lab1/build/work/xcelium.d/run.lnx8664.22.03.d
+-RUNMODE
+-CDSLIB
+/home/Stepan/micro_labs/lab1/build/work/xcelium.d/run.lnx8664.22.03.d/cds.lib
+-HDLVAR
+/home/Stepan/micro_labs/lab1/build/work/xcelium.d/run.lnx8664.22.03.d/hdl.var
+-XLNAME
+xrun
+-XLVERSION
+"TOOL:	xrun(64)	22.03-s001"

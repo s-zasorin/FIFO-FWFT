@@ -1,0 +1,249 @@
+
+#
+# Mnemonic Maps
+#
+mmap new  -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new  -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+array unset createdGroup
+array set createdGroup {}
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.DATA_WIDTH_IN}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.DATA_WIDTH_OUT}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.FIFO_DEPTH}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.ONE_RAM_DEPTH}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.PTR_WIDTH}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.aclk_i}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.almost_empty1}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.almost_empty2}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.aresetn_i}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.bypass_en1}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.bypass_en2}]}
+	} ]]
+waveform format $id -color #00ffff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.data_in1[31:0]}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.data_in2[31:0]}]}
+	} ]]
+waveform format $id -color #00ffff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.data_ram_out1[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.data_ram_out2[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.empty1}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.empty2}]}
+	} ]]
+waveform format $id -color #00ffff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.empty_ram}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.enable_head_reg1}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.enable_head_reg2}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.full}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.full1}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.full2}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.head_reg1[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.head_reg2[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.m_handshake1}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.m_handshake2}]}
+	} ]]
+waveform format $id -color #00ffff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.m_tdata1_o[31:0]}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.m_tdata2_o[31:0]}]}
+	} ]]
+waveform format $id -color #00ffff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.m_tready1_i}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.m_tready2_i}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.m_tuser1_o}]}
+	} ]]
+waveform format $id -color #9900ff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.m_tuser2_o}]}
+	} ]]
+waveform format $id -color #00ffff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.m_tvalid1_o}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.m_tvalid2_o}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.rd_en1}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.rd_en2}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.rd_ptr1[3:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.rd_ptr2[3:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.s_handshake}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.s_tdata_i[63:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.s_tready_o}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.s_tvalid_i}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.wr_en1}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.wr_en2}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.wr_ptr1[3:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.wr_ptr2[3:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram1.ADDR_WIDTH}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram1.DATA_WIDTH}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram1.RAM_DEPTH}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram1.clk_i}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram1.data_ff[31:0]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram1.data_i[31:0]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram1.data_o[31:0]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram1.ram[7:0]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram1.rd_addr_i[2:0]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram1.rd_en_i}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram1.wr_addr_i[2:0]}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram1.wr_en_i}]}
+	} ]]
+waveform format $id -color #ff9900
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram2.ADDR_WIDTH}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram2.DATA_WIDTH}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram2.RAM_DEPTH}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram2.clk_i}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram2.data_ff[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram2.data_i[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram2.data_o[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram2.ram[7:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram2.rd_addr_i[2:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram2.rd_en_i}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram2.wr_addr_i[2:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.i_ram2.wr_en_i}]}
+	} ]]
+
+waveform xview limits 0 1016ns

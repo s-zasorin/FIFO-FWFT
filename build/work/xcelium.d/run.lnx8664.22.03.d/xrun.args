@@ -1,0 +1,13 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-compile
+-64bit
+/home/Stepan/micro_labs/lab1/build/../rtl/multi_port_fifo.sv
+/home/Stepan/micro_labs/lab1/build/../rtl/dual_port_ram.sv
+/home/Stepan/micro_labs/lab1/build/../tb/tb_fifo.sv
+-xmlibdirpath
+/home/Stepan/micro_labs/lab1/build/work
+-l
+/home/Stepan/micro_labs/lab1/build/compile.log
