@@ -23,4 +23,4 @@ mkdir -p ${curdir}/work
 # Аргумент '-l' указывает путь к лог-файлу элаборации.
 
 xrun -elaborate -elabonly -64bit -top tb_fifo -snapshot tb_fifo_opt \
-    -xmlibdirpath ${curdir}/work -access +rwc -l ${curdir}/opt.log
+    -xmlibdirpath ${curdir}/work -access +rwc -l ${curdir}/opt.log -coverage all -covoverwrite

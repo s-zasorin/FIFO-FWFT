@@ -15,4 +15,4 @@ mkdir -p ${curdir}/work
 # Аргумент '-l' указывает путь к лог-файлу компиляции.
 
 xrun -compile -64bit ${curdir}/../rtl/multi_port_fifo.sv ${curdir}/../rtl/dual_port_ram.sv ${curdir}/../tb/tb_fifo.sv \
-    -xmlibdirpath ${curdir}/work -l ${curdir}/compile.log
+    -xmlibdirpath ${curdir}/work -l ${curdir}/compile.log -linedebug
