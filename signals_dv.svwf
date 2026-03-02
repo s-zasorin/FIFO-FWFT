@@ -81,5 +81,17 @@ set id [waveform add -signals [subst  {
 	{[format {tb_fifo.s_tvalid}]}
 	} ]]
 waveform format $id -color #0000ff
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.full1}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.full2}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.empty1}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fifo.DUT.empty2}]}
+	} ]]
 
-waveform xview limits 21ns 197ns
+waveform xview limits 0 195ns

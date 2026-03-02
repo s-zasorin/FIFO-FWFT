@@ -4,7 +4,7 @@ module tb_fifo();
   localparam DATA_WIDTH_IN  = 2 * DATA_WIDTH_OUT;
   localparam FIFO_DEPTH     = 16;
   localparam RAM_DEPTH      = FIFO_DEPTH / 2;
-  int        CLK_PERIOD     = 5;
+  int        CLK_PERIOD     = 10;
 
   logic clk;
   logic aresetn;
@@ -82,8 +82,7 @@ multi_port_fifo
   initial begin
     clk <= 1'b0;
     forever begin
-      #CLK_PERIOD;
-      clk <= ~clk;
+        #(CLK_PERIOD/2) clk = ~clk;
     end
   end
 
@@ -131,18 +130,20 @@ multi_port_fifo
   end
 
   task read1();
-    m_tready1 <= 1'b1;
-    wait(m_tready1 && m_tvalid1);
-    ref_tdata1 = ram1.pop_back();
     @(posedge clk);
+    m_tready1 <= 1'b1;
+    @(posedge clk);
+    while(!m_tvalid1) @(posedge clk);
     m_tready1 <= 1'b0;
+    @(posedge clk);
   endtask
   task read2();
-    m_tready2 <= 1'b1;
-    wait(m_tready2 && m_tvalid2);
-    ref_tdata2 = ram2.pop_back();
     @(posedge clk);
+    m_tready2 <= 1'b1;
+    @(posedge clk);
+    while(!m_tvalid2) @(posedge clk);
     m_tready2 <= 1'b0;
+    @(posedge clk);
   endtask
   task read_last();
     if (m_tuser1)
@@ -180,17 +181,30 @@ multi_port_fifo
     end
   endtask
 
-  // При заполненном FIFO сигнал tvalid не может быть в 1
-  assert property (@(posedge clk) (ram1.size() == RAM_DEPTH || ram2.size() == RAM_DEPTH) |=> ~s_tready);
+  // При заполненном FIFO сигнал s_tready не может быть в 1
+  assert property (@(posedge clk) (ram1.size() == RAM_DEPTH || ram2.size() == RAM_DEPTH) |-> ~s_tready);
 
   // При чтении из FIFO данные соответствуют эталонной модели
-  assert property
-    (@(posedge clk) (m_tready1 && m_tvalid1) |-> ref_tdata1 === $sampled(m_tdata1))
-  else
-    $error("Ref data: %h not match act data: %h", ref_tdata1, $sampled(m_tdata1));
-
-  // assert property
-  //   (@(posedge clk) (m_tready2 && m_tvalid2) |-> ref_tdata2 === $sampled(m_tdata2))
-  // else
-  //   $error("Ref data: %h not match act data: %h", ref_tdata2, $sampled(m_tdata2));
+  initial begin
+    wait(aresetn);
+    forever begin
+        if (m_tready1 && m_tvalid1) begin
+          ref_tdata1 = ram1.pop_back();
+          if (ref_tdata1 !== m_tdata1)
+            $error("Ref data: %h not match act data: %h", ref_tdata1, m_tdata1);
+        end
+        @(posedge clk);
+    end
+  end
+  initial begin
+    wait(aresetn);
+    forever begin
+        if (m_tready2 && m_tvalid2) begin
+          ref_tdata2 = ram2.pop_back();
+          if (ref_tdata2 !== m_tdata2)
+            $error("Ref data: %h not match act data: %h", ref_tdata2, m_tdata2);
+        end
+        @(posedge clk);
+    end
+  end
 endmodule
