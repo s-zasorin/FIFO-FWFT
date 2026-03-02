@@ -3,3 +3,5 @@ build/waves.shm
 .symbolnamelist
 .symbolportinfomap
 build/cov_work
+build/*.log
+build/*.diag

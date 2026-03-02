@@ -31,9 +31,15 @@ module tb_fifo();
 
 
   task automatic reset_gen();
-    aresetn <= 1'b0;
-    @(posedge clk);
-    aresetn <= 1'b1;
+    fork
+      begin
+        aresetn <= 1'b0;
+        @(posedge clk);
+        aresetn <= 1'b1;
+      end
+      ram1.delete();
+      ram2.delete();
+    join
   endtask
 
   task automatic axis_write(input logic [DATA_WIDTH_IN - 1:0] data);
@@ -89,13 +95,16 @@ multi_port_fifo
   // Подача сброса, завершение симуляции
   initial begin
     reset_gen();
-    repeat(600) @(posedge clk);
+    repeat(400) @(posedge clk);
+    reset_gen();
+    repeat(400) @(posedge clk);
     $finish();
   end
 
   initial begin
     wait(aresetn);
     repeat(100) test_read_without_both();
+    repeat(100) test_read_both();
   end
 
   // Блок отправки 64-битных транзакций
