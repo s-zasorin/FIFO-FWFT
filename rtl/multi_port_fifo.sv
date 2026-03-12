@@ -65,8 +65,8 @@ module multi_port_fifo #(parameter DATA_WIDTH_OUT = 8                 ,
   assign empty1           = wr_ptr1[PTR_WIDTH - 1:0] == rd_ptr1[PTR_WIDTH - 1:0] && (wr_ptr1[PTR_WIDTH] == rd_ptr1[PTR_WIDTH]);
   assign empty2           = wr_ptr2[PTR_WIDTH - 1:0] == rd_ptr2[PTR_WIDTH - 1:0] && (wr_ptr2[PTR_WIDTH] == rd_ptr2[PTR_WIDTH]);
 
-  assign almost_empty1    = empty1 && bypass_en1 || (wr_ptr1 == 'b1 && wr_ptr1 != rd_ptr1);
-  assign almost_empty2    = empty2 && bypass_en2 || (wr_ptr2 == 'b1 && wr_ptr2 != rd_ptr2);
+  assign almost_empty1    = empty1 && bypass_en1 || (wr_ptr1 == rd_ptr1 + 'b1);
+  assign almost_empty2    = empty2 && bypass_en2 || (wr_ptr2 == rd_ptr2 + 'b1);
 
   assign full             = full1 || full2  ;
   assign empty_ram        = empty1 && empty2;
