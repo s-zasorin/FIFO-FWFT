@@ -28,7 +28,5 @@ mkdir -p ${curdir}/work
 # специального файла с командами, например '-input xlm.tcl',
 # или просто передавая команды, например '-input @"run"'.
 
-# 28038
-
 xrun -r tb_fifo_opt -64bit -xmlibdirpath ${curdir}/work $1 \
-    -seed $RANDOM -l ${curdir}/run.log -input xlm.tcl -gui -svseed 11785 -covoverwrite
+    -seed $RANDOM -l ${curdir}/run.log -input xlm.tcl -gui -svseed -13881356 -covoverwrite

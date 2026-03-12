@@ -31,13 +31,15 @@ module tb_fifo();
 
 
   task automatic reset_gen();
-    aresetn <= 1'b0;
-    @(posedge clk);
     fork
+      begin
+        aresetn <= 1'b0;
+        @(posedge clk);
+        aresetn <= 1'b1;
+      end
       ram1.delete();
       ram2.delete();
     join
-    aresetn <= 1'b1;
   endtask
 
   task automatic axis_write(input logic [DATA_WIDTH_IN - 1:0] data);
@@ -93,19 +95,16 @@ multi_port_fifo
   // Подача сброса, завершение симуляции
   initial begin
     reset_gen();
-    repeat(100) @(posedge clk);
-    // reset_gen();
-    // repeat(400) @(posedge clk);
+    repeat(400) @(posedge clk);
+    reset_gen();
+    repeat(400) @(posedge clk);
     $finish();
   end
 
   initial begin
     wait(aresetn);
-    repeat(100)
-    begin
-      test_read_random();
-    end
-    // repeat(100) test_read_both();
+    repeat(100) test_read_without_both();
+    repeat(100) test_read_both();
   end
 
   // Блок отправки 64-битных транзакций
@@ -183,10 +182,11 @@ multi_port_fifo
     std::randomize(is_both_read);
 
     if (is_both_read) begin
-      test_read_both();
+      wait(m_tvalid1 && m_tvalid2);
+      read_both();
     end
     else begin
-      test_read_without_both();
+      read_last();
     end
   endtask
 
