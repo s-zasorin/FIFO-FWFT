@@ -37,8 +37,11 @@ module tb_fifo();
         @(posedge clk);
         aresetn <= 1'b1;
       end
-      ram1.delete();
-      ram2.delete();
+      begin
+        @(posedge clk);
+        ram1.delete();
+        ram2.delete();
+      end
     join
   endtask
 
@@ -105,6 +108,7 @@ multi_port_fifo
     wait(aresetn);
     repeat(100) test_read_without_both();
     repeat(100) test_read_both();
+    repeat(100) test_read_random();
   end
 
   // Блок отправки 64-битных транзакций
@@ -132,7 +136,6 @@ multi_port_fifo
       if (s_tvalid && s_tready) begin
         ram1.push_front(s_tdata[DATA_WIDTH_IN/2 - 1 : 0]);
         ram2.push_front(s_tdata[DATA_WIDTH_IN   - 1 : DATA_WIDTH_IN/2]);
-        $display($sformatf("Ram1 size is: %d", ram1.size()));
       end
       @(posedge clk);
     end
